@@ -15,6 +15,12 @@ local screenWidth = 400
 local screenHeight = 240
 local screenShakeIntensity = 5
 
+local filePlayer= pd.sound.fileplayer.new("Sounds/TheWorstPolyphia", 5)
+--filePlayer:load("Sounds/TheWorstPolyphia.wav")
+filePlayer:play(3)
+filePlayer:setVolume(1.0)
+
+
 function  pd.update()
     gfx.clear()
     local crankAngle = math.rad(pd.getCrankPosition())
