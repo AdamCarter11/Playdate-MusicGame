@@ -36,7 +36,10 @@ function SpawnArrow()
 end
 local spawnTimer = pd.timer.new(timerInterval, SpawnArrow)
 spawnTimer.repeats = true
-spawnTimer:start()
+-- IAN: Lua check was yelling at me
+if spawnTimer ~= nil then
+    spawnTimer:start()
+end
 
 -- define image vars globally so the sprite setup function can access them
 local testImge
