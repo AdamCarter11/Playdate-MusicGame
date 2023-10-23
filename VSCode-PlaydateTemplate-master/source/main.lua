@@ -41,6 +41,7 @@ spawnTimer:start()
 -- define image vars globally so the sprite setup function can access them
 local testImge
 local arrowLeftSprite
+local colorTestSprite
 
 -- main game logic functions
 -- start is called at the very end to make sure all necessary functions have been made
@@ -51,9 +52,18 @@ function Start()
 
     local bgImage = gfx.image.new("Sprites/StartEmpty")
     assert(bgImage)
+    --[[
     gfx.sprite.setBackgroundDrawingCallback(
         function(x, y, width, height)
             bgImage:draw(0,0)
+        end
+    )
+    ]]
+    local colorTestImage = gfx.image.new("Sprites/ColorTest")
+    assert(colorTestImage)
+    gfx.sprite.setBackgroundDrawingCallback(
+        function(x, y, width, height)
+            colorTestImage:draw(0,0)
         end
     )
 
