@@ -49,11 +49,20 @@ function Start()
     -- assert(testImge) -- make sure image was loaded correctly
     -- SpriteSetup(testImge, 100, 100, 2)
 
+    local bgImage = gfx.image.new("Sprites/StartEmpty")
+    assert(bgImage)
+    gfx.sprite.setBackgroundDrawingCallback(
+        function(x, y, width, height)
+            bgImage:draw(0,0)
+        end
+    )
+
     local arrowLeft = gfx.image.new("Sprites/LeftArrow")
     assert(arrowLeft)
     arrowLeftSprite = gfx.sprite.new(arrowLeft)
     arrowLeftSprite:moveTo(400,120)
     arrowLeftSprite:add()
+
     
 end
 
