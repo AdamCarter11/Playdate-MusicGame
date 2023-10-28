@@ -4,6 +4,7 @@ import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
 local pd <const> = playdate
+local snd <const> = pd.sound
 local gfx <const> = pd.graphics
 
 -- anything below this comment can be rewritten/changed/deleted
@@ -21,6 +22,24 @@ local filePlayer= pd.sound.fileplayer.new("Sounds/TheWorstPolyphia", 5)
 --filePlayer:load("Sounds/TheWorstPolyphia.wav")
 filePlayer:play(3)
 filePlayer:setVolume(1.0)
+
+-- using sound module
+local currentSynths = {
+    snd.synth.new(snd.kWaveSawtooth), -- up
+    snd.synth.new(snd.kWaveSquare), -- down
+    snd.synth.new(snd.kWaveTriangle), -- left
+    snd.synth.new(snd.kWaveNoise) -- right
+}
+for i = 1, #currentSynths, 1
+do
+    currentSynths[i]:setVolume(0.5)
+    currentSynths[i]:setAttack(0)
+    currentSynths[i]:setDecay(0.15)
+    currentSynths[i]:setSustain(0.15)
+    currentSynths[i]:setRelease(0.5)
+    
+end
+local pitchValue
 
 -- an array of key inputs keyed to matching strings so we can use it to determine sprite spawn
 local keyInputs = {
@@ -95,6 +114,27 @@ function  pd.update()
     ]]
     if pd.buttonIsPressed(pd.kButtonLeft) and arrowLeftSprite.x < 150 then
         print("correct button pressed")
+    end
+
+    pitchValue = pd.getCrankPosition()
+
+    if pd.buttonIsPressed(pd.kButtonUp .. pd.kButtonDown .. pd.kButtonLeft .. pd.kButtonRight) then
+        for i=1, #currentSynths, 1
+        do
+            currentSynths[i]:noteOff()
+        end
+        if pd.buttonIsPressed(pd.kButtonUp) then
+            currentSynths[1]:playNote(pitchValue)
+        end
+        if pd.buttonIsPressed(pd.kButtonDown) then
+            currentSynths[2]:playNote(pitchValue)
+        end
+        if pd.buttonIsPressed(pd.kButtonLeft) then
+            currentSynths[3]:playNote(pitchValue)
+        end
+        if pd.buttonIsPressed(pd.kButtonRight) then
+            currentSynths[4]:playNote(pitchValue)
+        end
     end
 
    

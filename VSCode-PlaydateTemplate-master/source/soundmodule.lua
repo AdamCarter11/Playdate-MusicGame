@@ -1,7 +1,5 @@
 
-local pd <const> = playdate
 local snd <const> = playdate.sound
-local gfx <const> = pd.graphics
 
 -- sound testing
 snd.channel.new()
