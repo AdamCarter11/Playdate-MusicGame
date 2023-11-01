@@ -2,7 +2,7 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 local scoreSprite
-local scoreSprite
+local score
 
 function createScoreDisplay()
     scoreSprite = gfx.sprite.new()
