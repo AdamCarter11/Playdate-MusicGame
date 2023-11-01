@@ -9,6 +9,8 @@ import "Player"
 import "enemySpawner"
 import "scoreDisplay"
 
+-- reference: https://www.youtube.com/watch?v=BG-pbLrY3ro&ab_channel=SquidGod
+
 local pd <const> = playdate
 local snd <const> = pd.sound
 local gfx <const> = pd.graphics
