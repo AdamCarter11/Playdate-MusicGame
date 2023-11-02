@@ -29,3 +29,5 @@ function newsynth()
     s:setRelease(0)
     return s
 end
+
+

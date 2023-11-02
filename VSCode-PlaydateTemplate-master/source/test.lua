@@ -3,6 +3,8 @@ import "CoreLibs/graphics"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 
+import "soundModule"
+
 local pd <const> = playdate
 local snd <const> = pd.sound
 local gfx <const> = pd.graphics
