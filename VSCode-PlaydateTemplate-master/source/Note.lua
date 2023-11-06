@@ -116,22 +116,25 @@ function Note:playNote(noteQuality)
         -- play a random note not from this seq
         local whichNote = seqMap[self.whichSeq] + seqCounter + 4
         if whichNote > 16 then
-            whichNote = 16 % seqCounter
+            whichNote = 16 % (seqCounter + 1)
         end
         print("incorrect note: " .. whichNote)
+        if whichNote <= 0 then
+            whichNote = 1
+        end
         currNote = pd.sound.fileplayer.new(notes[whichNote])
-        currNote:play(3)
+        currNote:play(1)
     end
     if(noteQuality == 2) then
         -- play the note from the seq (maybe change the pitch?)
         local whichNote = seqMap[self.whichSeq] + seqCounter
         print(whichNote)
         currNote = pd.sound.fileplayer.new(notes[whichNote])
-        currNote:play(3)
+        currNote:play(1)
     end
     if(noteQuality == 3) then
         currNote = pd.sound.fileplayer.new(notes[8])
-        currNote:play(3)
+        currNote:play(1)
     end
     seqCounter += 1
     if seqCounter >= 4 then
