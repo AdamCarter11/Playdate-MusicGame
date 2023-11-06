@@ -6,7 +6,8 @@ import "CoreLibs/timer"
 -- other classes (objs)
 import "Player"
 -- import "Enemy"
-import "enemySpawner"
+-- import "enemySpawner"
+import "NoteSpawner"
 import "scoreDisplay"
 
 -- reference: https://www.youtube.com/watch?v=BG-pbLrY3ro&ab_channel=SquidGod
