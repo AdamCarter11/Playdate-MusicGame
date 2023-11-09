@@ -5,6 +5,8 @@ import "CoreLibs/timer"
 
 -- other classes (objs)
 import "Player"
+import "ABPlayer"
+import "Note"
 -- import "Enemy"
 -- import "enemySpawner"
 import "NoteSpawner"
@@ -25,7 +27,8 @@ function resetGame()
 end
 
 createScoreDisplay()
-Player(30, 120)
+Player(30, 60, gfx.image.new("Sprites/RightArrow"))
+ABPlayer(30, 150, gfx.image.new("Sprites/AButton"))
 -- Enemy(400, 120, 1)
 startSpawner()
 
