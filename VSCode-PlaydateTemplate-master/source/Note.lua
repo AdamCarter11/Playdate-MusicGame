@@ -99,6 +99,8 @@ function Note:update()
         self:remove()
         -- play a bad note
         self:playNote(1)
+        local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        currNote:play(1)
     end
 
     -- check if note was hit at right time
@@ -112,17 +114,24 @@ function Note:update()
     if(self.x > 20 and self.x < 40 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
+        local currNote = pd.sound.fileplayer.new(notes[5])
+        currNote:setRate(2)
+        currNote:play(1)
         print("PERFECT")
     end
     if(self.x > 0 and self.x < 10 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
-        self:playNote(2)
+        self:playNote(1)
+        local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        currNote:play(1)
         print("BAD")
     end
 
     if(self.x > 50 and self.x < 70 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
+        local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        currNote:play(1)
         print("BAD")
     end
 
