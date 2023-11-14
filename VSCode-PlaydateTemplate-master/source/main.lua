@@ -30,7 +30,7 @@ function resetGame()
     startSpawner()
 end
 
-GameScene()
+MenuScene()
 
 --createScoreDisplay()
 --Player(30, 120)
@@ -41,7 +41,7 @@ function Start()
     
 end
 
-function  pd.update()
+function pd.update()
     -- clear the screen before redrawing
     -- gfx.clear()
    
@@ -58,5 +58,3 @@ function drawSprites()
 end
 
 
--- call start
-Start()
