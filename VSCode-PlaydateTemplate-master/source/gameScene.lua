@@ -4,6 +4,7 @@ import "scoreDisplay"
 import "Player"
 import "sceneManager"
 import "menuScene"
+import "gameOverScene"
 
 local pd <const> = playdate;
 local gfx <const> = pd.graphics;
@@ -29,7 +30,7 @@ end
 function GameScene.update()
 
 	if pd.buttonJustPressed(pd.kButtonA) then
-        SCENE_MANAGER:switchScene(MenuScene)
+        SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end
 
 end
