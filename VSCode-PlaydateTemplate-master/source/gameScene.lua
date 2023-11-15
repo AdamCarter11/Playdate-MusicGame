@@ -3,13 +3,13 @@ import "NoteSpawner"
 import "scoreDisplay"
 import "Player"
 import "Pen"
-import "PenBorder"
+import "penBorder"
 import "sceneManager"
 import "menuScene"
 import "gameOverScene"
 
-local pd <const> = playdate;
-local gfx <const> = pd.graphics;
+local pd <const> = playdate
+local gfx <const> = pd.graphics
 
 class('GameScene').extends(gfx.sprite)
 
@@ -30,6 +30,9 @@ function GameScene:init()
     Pen (PEN_X_POS, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, 1)
     -- PenBorder (200, 120, WAVE_LENGTH, math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), 2)
     PenBorder (200, 120, WAVE_LENGTH, 0, 2 * math.pi, 5)
+    --gfx.drawLine(200, 120, 300, 200)
+    PenBorder (200, 120, WAVE_LENGTH, (PEN_BORDER_Y_MAX - PEN_BORDER_Y_MIN), (PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), 2)
+
     startSpawner()
 
     self:add()
@@ -37,6 +40,7 @@ end
 
 function GameScene.update()
 
+    gfx.sprite.update()
 	if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end

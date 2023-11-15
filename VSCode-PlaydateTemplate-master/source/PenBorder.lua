@@ -16,12 +16,14 @@ function PenBorder:init(x, y, length, startAng, endAng, speed)
     -- speed = period
     -- NOTE: phaseShift might be interesting for variation
     -- NOTE: length/#, where # can be a peak or valley in regards to tempo
+
     
     -- local test = gfx.drawSineWave(50, 120, 300, 120, 45, 90, 5)
     self:DrawWave()
     self.speed = speed
     self:moveTo(200,120)
     print("boarder init")
+
     self:add()
 end
 

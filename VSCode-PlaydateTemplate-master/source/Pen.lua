@@ -19,15 +19,15 @@ class('Pen').extends(gfx.sprite)
 function Pen:init(x, y, moveSpeed)
     local penImage = gfx.image.new("Sprites/Record")
     self:setImage(penImage)
-    self:moveTo(x, y)
-    self:add()
-
     self:setCollideRect(0, 0, self:getSize())
 
     self.x = x
     self.y = y
     self.currentCrankAngle = math.rad(pd.getCrankPosition())
     self.moveSpeed = moveSpeed
+
+    self:moveTo(x, y)
+    self:add()
 end
 
 function Pen:update()
