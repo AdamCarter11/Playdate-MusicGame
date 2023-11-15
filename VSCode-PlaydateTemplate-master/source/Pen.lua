@@ -1,23 +1,6 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class('Pen').extends(gfx.sprite)
-
-local X_POS = 10
-local Y_MAX = 55
-local Y_MIN = 5
-
-function Pen:init(moveSpeed)
-    local penImage = gfx.image.new("Sprites/disk_1")
-    self:setImage(penImage)
-    self:moveTo(X_POS, abs(Y_MAX-Y_MIN)/2)
-    self:add()
-
-    self:setCollideRect(0, 0, self:getSize())
-
-    self.moveSpeed = moveSpeed
-end
-
 -- NOTE: we care about:
 --   getCrankPosition() - for float position from range 0-359.9999
 --      as the crank changes from starting position to clockwise
@@ -31,12 +14,29 @@ end
 --      increases as the crank moves faster, similar to the way
 --      mouse acceleration works.
 
-function Pen:update()
-    if y + self:getSize()/2 > Y_MIN and y + self.getSize()/2 < Y_MAX then
-        self:moveBy(0, self.moveSpeed)
-    end
+class('Pen').extends(gfx.sprite)
+
+function Pen:init(x, y, moveSpeed)
+    local penImage = gfx.image.new("Sprites/Record")
+    self:setImage(penImage)
+    self:moveTo(x, y)
+    self:add()
+
+    self:setCollideRect(0, 0, self:getSize())
+
+    self.x = x
+    self.y = y
+    self.currentCrankAngle = math.rad(pd.getCrankPosition())
+    self.moveSpeed = moveSpeed
 end
 
-function Pen:setMoveSpeed()
-    self.moveSpeed = pd.getCrankChange()
+function Pen:update()
+    -- Get current crank position
+    crankAngle = math.rad(pd.getCrankPosition())
+
+    -- Only move up or down
+    -- self.tempX += math.sin(crankAngle) * self.moveSpeed
+    self.y -= math.cos(crankAngle) * self.moveSpeed
+
+    self:moveTo(self.x, self.y)
 end
