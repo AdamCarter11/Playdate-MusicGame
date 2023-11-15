@@ -29,7 +29,7 @@ function GameScene:init()
 
     Pen (PEN_X_POS, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, 1)
     -- PenBorder (200, 120, WAVE_LENGTH, math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), 2)
-
+    PenBorder (200, 120, WAVE_LENGTH, 0, 2 * math.pi, 5)
     startSpawner()
 
     self:add()

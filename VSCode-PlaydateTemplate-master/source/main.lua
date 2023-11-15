@@ -9,6 +9,7 @@ import "Player"
 -- import "enemySpawner"
 import "NoteSpawner"
 import "scoreDisplay"
+import "PenBorder"
 
 import "sceneManager"
 import "gameScene"
