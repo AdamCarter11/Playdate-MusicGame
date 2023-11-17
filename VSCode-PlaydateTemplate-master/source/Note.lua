@@ -80,7 +80,7 @@ function Note:init(moveSpeed, whichNoteSeq)
         y = 60
     end
     if(spriteNum >= 5) then
-        y = 92
+        y = 150
     end
     self:moveTo(x,y)
     self:add()
@@ -95,17 +95,55 @@ function Note:update()
     self:moveBy(-self.moveSpeed, 0)
 
     -- 0 should be wherever we want the threshold to be
-    if self.x < 10 then
+    if self.x < 5 then
         self:remove()
         -- play a bad note
         self:playNote(1)
+        local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        currNote:play(1)
     end
 
     -- check if note was hit at right time
-    if(self.x < 120 and self.x > 30 and pd.buttonJustPressed(self.whichButton)) then
+    --[[ if(self.x < 120 and self.x > 30 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         -- play good note
         self:playNote(2)
+    end ]]
+
+    --check distance to player blocks
+    if(self.x > 20 and self.x < 40 and pd.buttonJustPressed(self.whichButton)) then
+        self:remove()
+        self:playNote(2)
+        local currNote = pd.sound.fileplayer.new(notes[5])
+        currNote:setRate(2)
+        currNote:play(1)
+        print("PERFECT")
+    end
+    if(self.x > 0 and self.x < 10 and pd.buttonJustPressed(self.whichButton)) then
+        self:remove()
+        self:playNote(1)
+        local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        currNote:play(1)
+        print("BAD")
+    end
+
+    if(self.x > 50 and self.x < 70 and pd.buttonJustPressed(self.whichButton)) then
+        self:remove()
+        self:playNote(2)
+        local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        currNote:play(1)
+        print("BAD")
+    end
+
+    if(self.x > 10 and self.x < 20 and pd.buttonJustPressed(self.whichButton)) then
+        self:remove()
+        self:playNote(2)
+        print("OKAY")
+    end
+    if(self.x < 50 and self.x > 40 and pd.buttonJustPressed(self.whichButton)) then
+        self:remove()
+        self:playNote(2)
+        print("OKAY")
     end
 end
 

@@ -3,9 +3,9 @@ import "Bullet"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class('Player').extends(gfx.sprite)
+class('ABPlayer').extends(gfx.sprite)
 
-function Player:init(x,y, playerImage)
+function ABPlayer:init(x,y, playerImage)
     --local playerImage = gfx.image.new("Sprites/LeftArrow")
     self:setImage(playerImage)
     self:moveTo(x,y)
@@ -13,7 +13,7 @@ function Player:init(x,y, playerImage)
     self.speed = 3
 end
 
-function Player:update()
+function ABPlayer:update()
     --[[ if pd.buttonIsPressed(pd.kButtonUp) then
         if self.y > 0 then
             self:moveBy(0, -self.speed)
