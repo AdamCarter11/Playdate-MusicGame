@@ -26,6 +26,8 @@ function GameScene:init()
     createScoreDisplay()
     Player (PLAYER_X_POS, PLAYER_Y_POS)
     -- Enemy(400, 120, 1)
+    Player(30, 60, gfx.image.new("Sprites/RightArrow"))
+    ABPlayer(30, 150, gfx.image.new("Sprites/AButton"))
 
     Pen (PEN_X_POS, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, 1)
     -- PenBorder (200, 120, WAVE_LENGTH, math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), 2)

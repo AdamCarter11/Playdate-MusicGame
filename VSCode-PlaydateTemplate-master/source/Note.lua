@@ -117,6 +117,7 @@ function Note:update()
         local currNote = pd.sound.fileplayer.new(notes[5])
         currNote:setRate(2)
         currNote:play(1)
+        incrementScore(50)
         print("PERFECT")
     end
     if(self.x > 0 and self.x < 10 and pd.buttonJustPressed(self.whichButton)) then
@@ -124,6 +125,7 @@ function Note:update()
         self:playNote(1)
         local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
         currNote:play(1)
+        incrementScore(10)
         print("BAD")
     end
 
@@ -132,17 +134,20 @@ function Note:update()
         self:playNote(2)
         local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
         currNote:play(1)
+        incrementScore(10)
         print("BAD")
     end
 
     if(self.x > 10 and self.x < 20 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
+        incrementScore(25)
         print("OKAY")
     end
     if(self.x < 50 and self.x > 40 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
+        incrementScore(25)
         print("OKAY")
     end
 end

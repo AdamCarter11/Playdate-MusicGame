@@ -23,8 +23,8 @@ function updateDisplay()
     scoreSprite:setImage(scoreImage)
 end
 
-function incrementScore()
-    score += 1
+function incrementScore(amount)
+    score += amount
     updateDisplay()
 end
 
