@@ -11,6 +11,12 @@ import "Note"
 -- import "enemySpawner"
 import "NoteSpawner"
 import "scoreDisplay"
+import "PenBorder"
+
+import "sceneManager"
+import "gameScene"
+import "menuScene"
+
 
 -- reference: https://www.youtube.com/watch?v=BG-pbLrY3ro&ab_channel=SquidGod
 
@@ -18,6 +24,7 @@ local pd <const> = playdate
 local snd <const> = pd.sound
 local gfx <const> = pd.graphics
 
+SCENE_MANAGER = SceneManager()
 
 function resetGame()
     resetScore()
@@ -29,16 +36,21 @@ end
 createScoreDisplay()
 Player(30, 60, gfx.image.new("Sprites/RightArrow"))
 ABPlayer(30, 150, gfx.image.new("Sprites/AButton"))
+
+MenuScene()
+
+--createScoreDisplay()
+--Player(30, 120)
 -- Enemy(400, 120, 1)
-startSpawner()
+--startSpawner()
 
 function Start()
     
 end
 
-function  pd.update()
+function pd.update()
     -- clear the screen before redrawing
-    gfx.clear()
+    -- gfx.clear()
    
     -- draw the needed sprites
     drawSprites()
@@ -53,5 +65,3 @@ function drawSprites()
 end
 
 
--- call start
-Start()
