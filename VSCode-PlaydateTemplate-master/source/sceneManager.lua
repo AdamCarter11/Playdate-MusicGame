@@ -5,13 +5,15 @@ local gfx <const> = pd.graphics;
 class('SceneManager').extends()
 
 function SceneManager:init()
-    self.transitionTime = 1000
+    
+    transitionTime = 1000
+    print(transitionTime)
 end
 
 function SceneManager:switchScene(scene,...)
     self.newScene = scene
     self.sceneArgs = ...
-    self:loadNewScene()
+    self:startTransition()
 end
 
 function SceneManager:loadNewScene()
@@ -24,14 +26,12 @@ function SceneManager:cleanupScene()
     gfx.sprite.removeAll()
     self:removeAllTimers()
     gfx.setDrawOffset(0,0)
-
-
 end
 
 -- Transition still has bugs need to figure out so it's not calling here.
 
 function SceneManager:startTransition()
-    local transitionTimer = self.wipeTransition(0,400)
+    transitionTimer = self:wipeTransition(0,400)
 
     transitionTimer.timerEndedCallback = function()
         self:loadNewScene()
@@ -41,11 +41,13 @@ function SceneManager:startTransition()
     
 end
 
+
 function SceneManager:wipeTransition(startValue, endValue)
     local transitionSprite = self:createTransitionSprite()
+
     transitionSprite:setClipRect(0,0,startValue,240)
-    
-    local transitionTimer = pd.timer.new(self.transitionTime, startValue, endValue, pd.easingFunctions.inOutCubic)
+
+    transitionTimer = pd.timer.new(transitionTime, startValue, endValue, pd.easingFunctions.inOutCubic)
     transitionTimer.updateCallback = function(timer)
         transitionSprite:setClipRect(0,0,timer.value,240)
     end
