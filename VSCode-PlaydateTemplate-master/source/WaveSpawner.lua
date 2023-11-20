@@ -1,11 +1,12 @@
 import "CoreLibs/graphics"
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class('PenBorder').extends(gfx.sprite)
+class('WaveSpawner').extends(gfx.sprite)
 local newPer = 60
 i = 0
-function PenBorder:init(x, y, length, startAng, endAng, speed)
+function WaveSpawner:init(x, y, length, startAng, endAng, speed)
     --playdate.graphics.drawArc(x, y, radius, startAngle, endAngle)
     gfx.setColor(gfx.kColorBlack)
     -- gfx.drawArc(x, y, length, math.pi/2, math.pi)
@@ -31,20 +32,19 @@ function PenBorder:init(x, y, length, startAng, endAng, speed)
     self:add()
 end
 
-function PenBorder:DrawWave(x, y, period)
+function WaveSpawner:DrawWave(x, y, period)
     local testSprite = gfx.image.new(400, 240)
     gfx.pushContext(testSprite)
         --gfx.fillRoundRect(0, 0, 50, 50, 10)
         -- gfx.drawArc(0, 0, 50, 0, math.pi / 2)
         --gfx.fillRect(0,0,50, 25)
-        gfx.drawSineWave(self.x, self.y, 400, self.y, 100, 50, period, i)
+        gfx.drawSineWave(x, y, 400, self.y, 100, 100, period, i)
     gfx.popContext()
     self:setImage(testSprite)
 end
-function PenBorder:update()
-    -- self:moveBy(-self.speed, 0)
-    crankAngle = math.rad(pd.getCrankPosition())
-
+function WaveSpawner:update()
+    self:moveBy(-self.speed, 0)
+    --crankAngle = math.rad(pd.getCrankPosition())
     -- Only move up or down
     -- self.tempX += math.sin(crankAngle) * self.moveSpeed
     --newPer += math.abs(math.cos(crankAngle) * 2

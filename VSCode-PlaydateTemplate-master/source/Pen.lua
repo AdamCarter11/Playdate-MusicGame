@@ -16,7 +16,7 @@ local gfx <const> = pd.graphics
 
 class('Pen').extends(gfx.sprite)
 
-function Pen:init(x, y, moveSpeed)
+function Pen:init(x, y, moveSpeed, yMax, yMin)
     local penImage = gfx.image.new("Sprites/Record")
     self:setImage(penImage)
     self:setCollideRect(0, 0, self:getSize())
@@ -25,6 +25,8 @@ function Pen:init(x, y, moveSpeed)
     self.y = y
     self.currentCrankAngle = math.rad(pd.getCrankPosition())
     self.moveSpeed = moveSpeed
+    self.yMax = yMax
+    self.yMin = yMin
 
     self:moveTo(x, y)
     self:add()
@@ -38,5 +40,13 @@ function Pen:update()
     -- self.tempX += math.sin(crankAngle) * self.moveSpeed
     self.y -= math.cos(crankAngle) * self.moveSpeed
 
-    self:moveTo(self.x, self.y)
+    -- Internal collision
+    if self.y < self.yMin and self.y > self.yMax then
+        self:moveTo(self.x, self.y)
+    elseif self.y >= self.yMin then
+        -- Manual clamp
+        self.y = math.max(self.yMin, math.min(self.yMax, self.y))
+    elseif self.y <= self.yMax then
+        self.y = math.min(self.yMax, math.max(self.yMin, self.y))
+    end
 end

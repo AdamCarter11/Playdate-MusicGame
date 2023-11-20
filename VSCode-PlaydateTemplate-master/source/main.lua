@@ -11,7 +11,7 @@ import "Note"
 -- import "enemySpawner"
 import "NoteSpawner"
 import "scoreDisplay"
-import "PenBorder"
+import "WaveSpawner"
 
 import "sceneManager"
 import "gameScene"
