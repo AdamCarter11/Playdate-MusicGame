@@ -31,6 +31,8 @@ function GameScene:init()
     -- Spawn player
     Player (PLAYER_X_POS, PLAYER_Y_POS)
     -- Enemy(400, 120, 1)
+    Player(30, 60, gfx.image.new("Sprites/RightArrow"))
+    ABPlayer(30, 150, gfx.image.new("Sprites/AButton"))
 
     -- Spawn pen (crank controlled character)
     local _pen = Pen (PEN_X_POS, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, 1, PEN_BORDER_Y_MAX, PEN_BORDER_Y_MIN)

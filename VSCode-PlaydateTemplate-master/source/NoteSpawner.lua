@@ -8,6 +8,7 @@ local seqCounter = 0
 local whichNoteSeq = math.random(1,4)
 
 function startSpawner()
+    print("start spawner")
     math.randomseed(pd.getSecondsSinceEpoch())
     createTimer()
 end
@@ -27,7 +28,7 @@ function spawnNote()
         seqCounter = 0
     end
 
-    Note(2, whichNoteSeq)
+    Note(4, whichNoteSeq)
     seqCounter += 1
 end
 
