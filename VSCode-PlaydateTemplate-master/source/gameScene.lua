@@ -33,16 +33,20 @@ function GameScene:init()
     -- Enemy(400, 120, 1)
 
     -- Spawn pen (crank controlled character)
-    Pen (PEN_X_POS, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, 1, PEN_BORDER_Y_MAX, PEN_BORDER_Y_MIN)
+    local _pen = Pen (PEN_X_POS, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, 1, PEN_BORDER_Y_MAX, PEN_BORDER_Y_MIN)
 
     -- Spawn the wave from the right of the screen
-    WaveSpawner (SCREEN_X, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, WAVE_LENGTH, 0, 2 * math.pi, 5)
+    local _waveSpawner = WaveSpawner (SCREEN_X, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2, WAVE_LENGTH, 0, 2 * math.pi, 5)
+    --WaveSpawner (SCREEN_X + 10, (PEN_BORDER_Y_MAX + PEN_BORDER_Y_MIN)/2 + 100, WAVE_LENGTH, 0, 2 * math.pi, 5)
 
     ------previous tests for waveSpawner
     --WaveSpawner (200, 120, WAVE_LENGTH, math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), math.abs(PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), 2)
     --WaveSpawner (0, 160, WAVE_LENGTH, (PEN_BORDER_Y_MAX - PEN_BORDER_Y_MIN), (PEN_BORDER_Y_MAX- PEN_BORDER_Y_MIN), 2)
     --gfx.drawLine(200, 120, 300, 200)
     ------
+
+    -- Compare between the 2 game objects
+    --isBetweenRange(_pen, _waveSpawner)
 
     startSpawner()
 
@@ -55,5 +59,19 @@ function GameScene.update()
 	if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end
-
 end
+
+--#region == Helper Functions ==
+-- isBetweenRange()
+-- Gets the current waves' y positions at the Pen's x-point and returns true
+-- if the player's Pen is in the y-range
+function isBetweenRange(penObject, waveObject)
+    local inRange = false
+    local yMin, yMax = waveObject.getCurrentYRange()
+    if penObject.y > yMin and penObject.y < yMax then
+        print("in range")
+        return true
+    end
+    return inRange
+end
+--#endregion
