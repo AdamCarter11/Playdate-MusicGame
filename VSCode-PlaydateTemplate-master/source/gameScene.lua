@@ -61,6 +61,8 @@ function GameScene.update()
 	if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end
+
+    print(pd.getElapsedTime())
 end
 
 --#region == Helper Functions ==
