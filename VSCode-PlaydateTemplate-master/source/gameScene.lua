@@ -23,6 +23,8 @@ local PEN_X_POS = PADDING
 local PEN_BORDER_Y_MIN = SCREEN_Y - PADDING
 local PEN_BORDER_Y_MAX = PEN_BORDER_Y_MIN - 75
 local WAVE_LENGTH = 50
+local switchTrans = false
+local wait = false
 
 function GameScene:init()
 	
@@ -61,6 +63,15 @@ function GameScene.update()
 	if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end
+
+    if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
+        switchTrans = true
+    end
+
+    if(switchTrans == true) then
+        Switch()
+        
+    end
 end
 
 --#region == Helper Functions ==
@@ -76,4 +87,47 @@ function isBetweenRange(penObject, waveObject)
     end
     return inRange
 end
+
+function Switch()
+    playdate.gameWillResume()
+end
+
+function playdate.gameWillResume()
+
+	-- save off the current playdate.update so we can restore it at the end of the countdown
+	local saveOffUpdate = playdate.update
+	
+	playdate.update = 
+	function()	
+		
+		-- draw the countdown
+        gfx.clear()
+        gfx.drawText( "SWAP!", 180, 100  )
+		playdate.wait( 1000 )
+		gfx.clear()
+		gfx.drawText( "3", 200, 100 )
+		playdate.wait( 1000 )
+		gfx.clear()
+		gfx.drawText( "2", 200, 100 )
+		playdate.wait( 1000 )
+		gfx.clear()
+		gfx.drawText( "1", 200, 100 )
+		playdate.wait( 1000 )
+		gfx.clear()
+        gfx.drawText( "GO!", 180, 100 )
+		playdate.wait( 1000 )
+		gfx.clear()
+        switchTrans = false
+		
+		-- restore the "real" playdate.update
+		playdate.update = saveOffUpdate
+
+	end
+		
+end
+
+
+
+
+
 --#endregion
