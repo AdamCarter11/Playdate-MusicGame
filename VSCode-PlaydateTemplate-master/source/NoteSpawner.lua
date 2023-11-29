@@ -14,6 +14,7 @@ local whichNoteSeq = math.random(1,4)
 local canSpawn = true
 
 function startSpawner()
+    --hi
     print("start spawner")
     math.randomseed(pd.getSecondsSinceEpoch())
     createTimer()
