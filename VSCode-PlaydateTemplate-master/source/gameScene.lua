@@ -30,7 +30,6 @@ local switchTrans = false
 local wait = false
 
 function GameScene:init()
-	--ModuleTest.printHi()
     createScoreDisplay()
 
     -- Spawn player
@@ -69,7 +68,7 @@ function GameScene.update()
 
     if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
         switchTrans = true
-
+        TurnOffSpawner()
         -- heres an example of how we can turn off the spawner
             -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
             -- refer to line 28 for how I got access to the object like this

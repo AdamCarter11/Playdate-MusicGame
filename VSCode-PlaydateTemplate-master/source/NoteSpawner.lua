@@ -1,10 +1,12 @@
 import "Note"
 
 -- used to make this a "class" accessible from wherever you are requiring it
-Spawner = {}
+--Spawner = {}
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
+
+class('NoteSpawner').extends()
 
 local spawnTimer
 local seqCounter = 0
@@ -44,10 +46,10 @@ function stopSpawner()
     end
 end
 
-function Spawner.TurnOffSpawner()
+function TurnOffSpawner()
     canSpawn = false
 end
 
-function Spawner.TurnOnSpawner()
+function TurnOnSpawner()
     canSpawn = true
 end
