@@ -1,11 +1,15 @@
 import "Note"
 
+-- used to make this a "class" accessible from wherever you are requiring it
+Spawner = {}
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 local spawnTimer
 local seqCounter = 0
 local whichNoteSeq = math.random(1,4)
+local canSpawn = true
 
 function startSpawner()
     print("start spawner")
@@ -17,7 +21,9 @@ function createTimer()
     local spawnTime = math.random(2000,2500) -- this is basically the bpm
     spawnTimer = pd.timer.performAfterDelay(spawnTime, function ()
         createTimer()
-        spawnNote()
+        if(canSpawn) then
+            spawnNote()
+        end
     end)
 end
 
@@ -36,4 +42,12 @@ function stopSpawner()
     if spawnTimer then
         spawnTimer:remove()
     end
+end
+
+function Spawner.TurnOffSpawner()
+    canSpawn = false
+end
+
+function Spawner.TurnOnSpawner()
+    canSpawn = true
 end

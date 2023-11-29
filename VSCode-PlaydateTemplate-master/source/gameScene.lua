@@ -11,6 +11,9 @@ import "gameOverScene"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+--local noteSpawnerObj = require ("NoteSpawner")
+--local testSample = require("ModuleTest")
+
 class('GameScene').extends(gfx.sprite)
 
 -- Starting Positions/Values
@@ -27,7 +30,7 @@ local switchTrans = false
 local wait = false
 
 function GameScene:init()
-	
+	--ModuleTest.printHi()
     createScoreDisplay()
 
     -- Spawn player
@@ -66,6 +69,11 @@ function GameScene.update()
 
     if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
         switchTrans = true
+
+        -- heres an example of how we can turn off the spawner
+            -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
+            -- refer to line 28 for how I got access to the object like this
+        --noteSpawnerObj.TurnOffSpawner()
     end
 
     if(switchTrans == true) then
