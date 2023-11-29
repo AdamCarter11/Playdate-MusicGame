@@ -1,8 +1,10 @@
-
+local gfx <const> = playdate.graphics
 local snd <const> = playdate.sound
 
+class('SoundModule').extends(gfx.sprite)
+
 -- sound testing
-snd.channel.new()
+--snd.channel.new()
 -- pd.sound.channel.setVolume(0.5)
 -- playNote format
 --   pitch: Hertz values. 261.63 = C4, can also use string for Db3 (D flat 3)
@@ -20,14 +22,24 @@ snd.channel.new()
 -- pd.sound.getCurrentTime()
 -- pd.sound.synth:playMIDINote(C4, 1)
 
-function newsynth()
+function SoundModule:init()
+    SoundModule.super.init(self)
+    self.instrumentList = {}
+end
+
+function SoundModule:newsynth()
     local s = snd.synth.new(snd.kWaveSawtooth)
     s:setVolume(0.2)
     s:setAttack(0)
     s:setDecay(0.15)
     s:setSustain(0.2)
     s:setRelease(0)
+
+    self.instrumentList.add(s)
     return s
 end
 
+function SoundModule:playSound()
+    print(self.instrumentList.length())
+end
 
