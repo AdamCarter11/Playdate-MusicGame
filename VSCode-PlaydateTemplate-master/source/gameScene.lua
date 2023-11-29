@@ -30,6 +30,7 @@ local WAVE_LENGTH = 50
 local switchTrans = false
 local wait = false
 local pauseTime = 15
+local health = 4
 
 function GameScene:init()
     createScoreDisplay()
@@ -116,3 +117,10 @@ function playdate.gameWillResume()
 end
 
 --#endregion
+
+function changeHealth(changeVal)
+    health -= changeVal
+    if health <= 0 then
+        SCENE_MANAGER:switchScene(GameOverScene, returnScore())
+    end
+end

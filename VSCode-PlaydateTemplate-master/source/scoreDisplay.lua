@@ -72,3 +72,6 @@ function resetScore()
     score = 0
     updateDisplay()
 end
+function returnScore()
+    return score
+end

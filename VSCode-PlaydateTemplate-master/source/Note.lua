@@ -100,6 +100,7 @@ function Note:update()
         -- play a bad note
         self:playNote(1)
         local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
+        changeHealth(1)
         currNote:play(1)
         resetStreak()
     end
