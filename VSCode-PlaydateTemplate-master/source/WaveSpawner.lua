@@ -120,15 +120,15 @@ function WaveSpawner:isBetweenRange(penObject)
     local inRange = false
     local penMiddle = self.penObject.y - 20
     if penMiddle > y1 and penMiddle < y2 then
-        print("in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
-        --self.waveSynth:playNote(penObject.y)
+        --print("in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
+        self.waveSynth:playNote(penObject.y)
         return true
     elseif penMiddle <= y1 then
-        --self.waveSynth:playNote(penObject.y + self.y)
-        print("NOT in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
+        self.waveSynth:playNote(penObject.y + self.y)
+        --print("NOT in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
     elseif penMiddle >= y2 then
-        --self.waveSynth:playNote(penObject.y - self.y)
-        print("NOT in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
+        self.waveSynth:playNote(penObject.y - self.y)
+        --print("NOT in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
     else
         --self.waveSynth:noteOff()
     end

@@ -8,12 +8,14 @@ import "WallCollider"
 import "sceneManager"
 import "menuScene"
 import "gameOverScene"
+import "ModuleTest"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 --local noteSpawnerObj = require ("NoteSpawner")
---local testSample = require("ModuleTest")
+--print(lfs.currentdir())
+--require("ModuleTest")
 
 class('GameScene').extends(gfx.sprite)
 
@@ -33,6 +35,8 @@ local pauseTime = 15
 local health = 4
 
 function GameScene:init()
+    --printHi()
+    --ModuleTest:printHi()
     createScoreDisplay()
     -- Spawn player
     Player (PLAYER_X_POS, PLAYER_Y_POS)
@@ -49,8 +53,10 @@ function GameScene:init()
 end
 
 function GameScene.update()
-
     gfx.sprite.update()
+    --ModuleTest:addScore()
+    --ModuleTest:printHi()
+    printHi()
 	if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end
