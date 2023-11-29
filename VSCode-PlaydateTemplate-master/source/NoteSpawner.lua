@@ -53,3 +53,7 @@ end
 function TurnOnSpawner()
     canSpawn = true
 end
+
+function testPrint()
+    print("hello")
+end

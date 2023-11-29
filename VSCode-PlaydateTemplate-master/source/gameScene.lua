@@ -31,7 +31,6 @@ local wait = false
 
 function GameScene:init()
     createScoreDisplay()
-
     -- Spawn player
     Player (PLAYER_X_POS, PLAYER_Y_POS)
     -- Enemy(400, 120, 1)
