@@ -28,6 +28,7 @@ local PEN_BORDER_Y_MAX = PEN_BORDER_Y_MIN - 75
 local WAVE_LENGTH = 50
 local switchTrans = false
 local wait = false
+local pauseTime = 15
 
 function GameScene:init()
     createScoreDisplay()
@@ -72,6 +73,11 @@ function GameScene.update()
             -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
             -- refer to line 28 for how I got access to the object like this
         --noteSpawnerObj.TurnOffSpawner()
+    end
+    if(math.floor(pd.getElapsedTime()) % pauseTime == 0 and switchTrans == false) then
+        pauseTime += 20
+        TurnOffSpawner()
+        print("timer stopped")
     end
 
     if(switchTrans == true) then
@@ -124,6 +130,8 @@ function playdate.gameWillResume()
 		playdate.wait( 1000 )
 		gfx.clear()
         switchTrans = false
+        TurnOnSpawner()
+        print("timer started")
 		
 		-- restore the "real" playdate.update
 		playdate.update = saveOffUpdate
