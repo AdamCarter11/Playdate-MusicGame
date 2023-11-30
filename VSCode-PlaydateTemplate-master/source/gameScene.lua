@@ -30,7 +30,7 @@ local PEN_BORDER_Y_MIN = SCREEN_Y - PADDING
 local PEN_BORDER_Y_MAX = PEN_BORDER_Y_MIN - 75
 local WAVE_LENGTH = 50
 local switchTrans = false
-local wait = false
+local startTime = false
 local pauseTime = 15
 local health = 4
 
@@ -53,6 +53,7 @@ function GameScene:init()
 end
 
 function GameScene.update()
+    print(startTime)
     gfx.sprite.update()
     --ModuleTest:addScore()
     --ModuleTest:printHi()
@@ -60,24 +61,25 @@ function GameScene.update()
 	if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
     end
-
-    if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
-        switchTrans = true
-        TurnOffSpawner()
-        -- heres an example of how we can turn off the spawner
-            -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
-            -- refer to line 28 for how I got access to the object like this
-        --noteSpawnerObj.TurnOffSpawner()
+    if (startTime) then
+        if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
+            switchTrans = true
+            TurnOffSpawner()
+            -- heres an example of how we can turn off the spawner
+                -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
+                -- refer to line 28 for how I got access to the object like this
+            --noteSpawnerObj.TurnOffSpawner()
+        end
+        if(math.floor(pd.getElapsedTime()) % pauseTime == 0 and switchTrans == false) then
+            pauseTime += 20
+            TurnOffSpawner()
+            print("timer stopped")
+        end
     end
-    if(math.floor(pd.getElapsedTime()) % pauseTime == 0 and switchTrans == false) then
-        pauseTime += 20
-        TurnOffSpawner()
-        print("timer stopped")
-    end
+    
 
     if(switchTrans == true) then
         Switch()
-        
     end
 end
 
@@ -129,4 +131,8 @@ function changeHealth(changeVal)
     if health <= 0 then
         SCENE_MANAGER:switchScene(GameOverScene, returnScore())
     end
+end
+
+function startSwapTime()
+    startTime = true
 end

@@ -23,5 +23,7 @@ end
 function MenuScene.update()
     if pd.buttonJustPressed(pd.kButtonA) then
         SCENE_MANAGER:switchScene(GameScene)
+        startSwapTime()
+        pd.resetElapsedTime()
     end
 end
