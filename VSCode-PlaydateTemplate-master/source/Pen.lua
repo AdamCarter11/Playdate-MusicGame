@@ -20,7 +20,7 @@ local snd <const> = pd.sound
 class('Pen').extends(gfx.sprite)
 
 function Pen:init(x, y, moveSpeed, yMax, yMin)
-    local penImage = gfx.image.new("Sprites/Record")
+    local penImage = gfx.image.new("Sprites/Pointer")
     self:setImage(penImage)
     self:setCollideRect(0, 0, self:getSize())
 
