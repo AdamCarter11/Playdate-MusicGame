@@ -21,7 +21,8 @@ function MenuScene:init()
 end
 
 function MenuScene.update()
-    if pd.buttonJustPressed(pd.kButtonA) then
+    if pd.buttonJustPressed(pd.kButtonA) and not returnTransitionState() then
+        print("start game")
         SCENE_MANAGER:switchScene(GameScene)
         startSwapTime()
         pd.resetElapsedTime()

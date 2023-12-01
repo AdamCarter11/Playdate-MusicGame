@@ -3,6 +3,7 @@ local pd <const> = playdate;
 local gfx <const> = pd.graphics;
 
 class('SceneManager').extends()
+local transitioning = false
 
 function SceneManager:init()
     
@@ -11,9 +12,13 @@ function SceneManager:init()
 end
 
 function SceneManager:switchScene(scene,...)
-    self.newScene = scene
-    self.sceneArgs = ...
-    self:startTransition()
+    if  not transitioning then
+        transitioning = true
+        self.newScene = scene
+        self.sceneArgs = ...
+        self:startTransition()
+    end
+    
 end
 
 function SceneManager:loadNewScene()
@@ -36,7 +41,7 @@ function SceneManager:startTransition()
     transitionTimer.timerEndedCallback = function()
         self:loadNewScene()
         transitionTimer = self:wipeTransition(400,0)
-        
+        transitioning = false
     end
     
 end
@@ -70,4 +75,8 @@ function SceneManager:removeAllTimers()
     for _, timer in ipairs(allTimers) do
         timer:remove()
     end
+end
+
+function returnTransitionState()
+    return transitioning
 end

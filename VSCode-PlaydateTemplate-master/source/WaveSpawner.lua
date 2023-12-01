@@ -101,9 +101,9 @@ function WaveSpawner:DrawWave(x, y, period)
 
     gfx.pushContext(testSprite)
         -- draw debug line
-        gfx.drawRect(self.penObject.x, penMiddle, 400, 1)
-        gfx.drawRect(self.penObject.x, y1, 800, 1)
-        gfx.drawRect(self.penObject.x, y2, 800, 1)
+        --gfx.drawRect(self.penObject.x, penMiddle, 400, 1)
+        --gfx.drawRect(self.penObject.x, y1, 800, 1)
+        --gfx.drawRect(self.penObject.x, y2, 800, 1)
         -- draw sine waves
         gfx.drawSineWave(x, y, 400, self.y, self.amp, self.amp, period, i)
         gfx.drawSineWave(x, y + yInterval, 400, self.y + yInterval, self.amp, self.amp, period, i)
