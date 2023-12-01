@@ -8,7 +8,7 @@ local gfx <const> = pd.graphics
 class('GameOverScene').extends(gfx.sprite)
 
 function GameOverScene:init(text)
-
+    resetHealth()
     local gameOverImage = gfx.image.new(gfx.getTextSize(text))
     gfx.pushContext(gameOverImage)
         gfx.drawText(text, 0, 0)

@@ -25,7 +25,7 @@ function Player:update()
         end
     end ]]
 
-    if pd.buttonJustPressed(pd.kButtonA) then
-        Bullet(self.x, self.y, 5)
-    end
+    --if pd.buttonJustPressed(pd.kButtonA) then
+        --Bullet(self.x, self.y, 5)
+   -- end
 end

@@ -6,12 +6,12 @@ class('Note').extends(gfx.sprite)
 
 -- Define an array of sprite file paths
 local spritePaths = {
-    "Sprites/RightArrow",
-    "Sprites/LeftArrow",
-    "Sprites/UpArrow",
-    "Sprites/DownArrow",
-    "Sprites/AButton",
-    "Sprites/BButton"
+    "Sprites/Arrow_R",
+    "Sprites/Arrow_L",
+    "Sprites/Arrow_Up",
+    "Sprites/Arrow_Down",
+    "Sprites/Button_A",
+    "Sprites/Button_B"
 }
 -- define array of notes
 local notes = {
@@ -35,12 +35,12 @@ local notes = {
 
 -- Define a table that maps sprite paths to numbers
 local spriteMap = {
-    ["Sprites/RightArrow"] = 1,
-    ["Sprites/LeftArrow"] = 2,
-    ["Sprites/UpArrow"] = 3,
-    ["Sprites/DownArrow"] = 4,
-    ["Sprites/AButton"] = 5,
-    ["Sprites/BButton"] = 6
+    ["Sprites/Arrow_R"] = 1,
+    ["Sprites/Arrow_L"] = 2,
+    ["Sprites/Arrow_Up"] = 3,
+    ["Sprites/Arrow_Down"] = 4,
+    ["Sprites/Button_A"] = 5,
+    ["Sprites/Button_B"] = 6,
 }
 -- define a table to associate sprite with key input
 local actionMap = {
@@ -77,10 +77,10 @@ function Note:init(moveSpeed, whichNoteSeq)
     local y = 0
     -- I'm adding 32 for each row for now as thats the sprite height
     if(spriteNum < 5) then
-        y = 60
+        y = 171
     end
     if(spriteNum >= 5) then
-        y = 150
+        y = 189
     end
     self:moveTo(x,y)
     self:add()
@@ -93,7 +93,6 @@ end
 
 function Note:update()
     self:moveBy(-self.moveSpeed, 0)
-
     -- 0 should be wherever we want the threshold to be
     if self.x < 5 then
         self:remove()
@@ -113,7 +112,7 @@ function Note:update()
     end ]]
 
     --check distance to player blocks
-    if(self.x > 20 and self.x < 40 and pd.buttonJustPressed(self.whichButton)) then
+    if(self.x >= 44 and self.x <= 57 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
         local currNote = pd.sound.fileplayer.new(notes[5])
@@ -125,7 +124,7 @@ function Note:update()
         print("PERFECT")
         
     end
-    if(self.x > 0 and self.x < 10 and pd.buttonJustPressed(self.whichButton)) then
+    if(self.x > 4 and self.x < 18 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(1)
         local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
@@ -135,7 +134,7 @@ function Note:update()
         resetStreak()
     end
 
-    if(self.x > 50 and self.x < 70 and pd.buttonJustPressed(self.whichButton)) then
+    if(self.x > 70 and self.x < 83 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
         local currNote = pd.sound.fileplayer.new("Sounds/bad miss")
@@ -145,13 +144,13 @@ function Note:update()
         resetStreak()
     end
 
-    if(self.x > 10 and self.x < 20 and pd.buttonJustPressed(self.whichButton)) then
+    if(self.x >= 31 and self.x < 44 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
         incrementScore(25)
         print("OKAY")
     end
-    if(self.x < 50 and self.x > 40 and pd.buttonJustPressed(self.whichButton)) then
+    if(self.x <= 70 and self.x > 57 and pd.buttonJustPressed(self.whichButton)) then
         self:remove()
         self:playNote(2)
         incrementScore(25)

@@ -25,5 +25,7 @@ function MenuScene.update()
         SCENE_MANAGER:switchScene(GameScene)
         startSwapTime()
         pd.resetElapsedTime()
+        resetPauseTime()
+        TurnOnSpawner()
     end
 end

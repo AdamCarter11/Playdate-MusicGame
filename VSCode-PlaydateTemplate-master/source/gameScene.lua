@@ -35,14 +35,19 @@ local pauseTime = 15
 local health = 4
 
 function GameScene:init()
+    local backgroundImage = gfx.image.new("Sprites/Radio Recording Room")
+
+    backgroundSprite = gfx.sprite.new(backgroundImage)
+    backgroundSprite:moveTo(200,120)
+    backgroundSprite:add()
     --printHi()
     --ModuleTest:printHi()
     createScoreDisplay()
     -- Spawn player
     Player (PLAYER_X_POS, PLAYER_Y_POS)
     -- Enemy(400, 120, 1)
-    Player(30, 60, gfx.image.new("Sprites/RightArrow"))
-    ABPlayer(30, 150, gfx.image.new("Sprites/AButton"))
+    Player(51, 171, gfx.image.new("Sprites/Arrow"))
+    ABPlayer(51, 189, gfx.image.new("Sprites/Button"))
 
     -- Spawn the waves from the right of the screen
     WaveSpawner (400, PLAYER_Y_POS + 20, WAVE_LENGTH, 2 * math.pi, 200, 1)
@@ -53,14 +58,15 @@ function GameScene:init()
 end
 
 function GameScene.update()
-    print(startTime)
+    --print(startTime)
     gfx.sprite.update()
     --ModuleTest:addScore()
     --ModuleTest:printHi()
-    printHi()
-	if pd.buttonJustPressed(pd.kButtonA) then
-        SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
-    end
+    --printHi()
+	-- if pd.buttonJustPressed(pd.kButtonA) then
+    --     SCENE_MANAGER:switchScene(GameOverScene, "Score: 10")
+    -- end
+    
     if (startTime) then
         if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
             switchTrans = true
@@ -131,6 +137,14 @@ function changeHealth(changeVal)
     if health <= 0 then
         SCENE_MANAGER:switchScene(GameOverScene, returnScore())
     end
+end
+
+function resetHealth()
+    health = 4
+end
+
+function resetPauseTime()
+    pauseTime = 15
 end
 
 function startSwapTime()
