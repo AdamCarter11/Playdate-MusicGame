@@ -75,3 +75,7 @@ end
 function returnScore()
     return score
 end
+
+function addWaveScore()
+    score += 1
+end

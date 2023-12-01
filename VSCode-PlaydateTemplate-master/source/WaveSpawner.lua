@@ -122,6 +122,7 @@ function WaveSpawner:isBetweenRange(penObject)
     if penMiddle > y1 and penMiddle < y2 then
         --print("in range" .. y2 .. " > " .. penMiddle .. " > " .. y1)
         self.waveSynth:playNote(penObject.y)
+        addWaveScore()
         return true
     elseif penMiddle <= y1 then
         self.waveSynth:playNote(penObject.y + self.y)
