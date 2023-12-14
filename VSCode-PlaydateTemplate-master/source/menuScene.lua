@@ -10,11 +10,16 @@ class('MenuScene').extends(gfx.sprite)
 
 function MenuScene:init()
     local backgroundImage = gfx.image.new("Sprites/StartEmpty")
+    local jamText = gfx.image.new("Sprites/PressAToJam")
     --gfx.sprite.setBackgroundDrawingCallback(function ()backgroundImage:draw(0,0) end)
     --backgroundSprite:moveTo(0,0)
     backgroundSprite = gfx.sprite.new(backgroundImage)
     backgroundSprite:moveTo(200,120)
     backgroundSprite:add()
+
+    jamSprite = gfx.sprite.new(jamText)
+    jamSprite:moveTo(330,50)
+    jamSprite:add()
 
     self:add()
 
