@@ -25,10 +25,11 @@ local SCREEN_Y = 240
 local PADDING = 15
 local PLAYER_X_POS = 30
 local PLAYER_Y_POS = 120
-local PEN_X_POS = PADDING
-local PEN_BORDER_Y_MIN = SCREEN_Y - PADDING
-local PEN_BORDER_Y_MAX = PEN_BORDER_Y_MIN - 75
-local WAVE_LENGTH = 50
+local WAVE_START_Y = 163
+local WAVE_LENGTH = 200
+local WAVE_AMP = 3
+local WAVE_PERIOD = 200
+local WAVE_SPEED = 1
 local switchTrans = false
 local startTime = false
 local pauseTime = 15
@@ -50,7 +51,7 @@ function GameScene:init()
     ABPlayer(51, 189, gfx.image.new("Sprites/Button"))
 
     -- Spawn the waves from the right of the screen
-    WaveSpawner (400, PLAYER_Y_POS + 20, WAVE_LENGTH, 2 * math.pi, 200, 1)
+    WaveSpawner (SCREEN_X, WAVE_START_Y, WAVE_LENGTH, WAVE_AMP, WAVE_PERIOD, WAVE_SPEED)
 
     startSpawner()
 
