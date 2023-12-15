@@ -37,10 +37,20 @@ local health = 4
 
 function GameScene:init()
     local backgroundImage = gfx.image.new("Sprites/Radio Recording Room")
+    local boarderLeft = gfx.image.new("Sprites/BiggerBoarder")
+    local boarderRight = gfx.image.new("Sprites/EvenBiggerBoarder")
 
     backgroundSprite = gfx.sprite.new(backgroundImage)
     backgroundSprite:moveTo(200,120)
     backgroundSprite:add()
+
+    boarderLeftImg = gfx.sprite.new(boarderLeft)
+    boarderLeftImg:moveTo(95,10)
+    boarderLeftImg:add()
+
+    boarderRightImg = gfx.sprite.new(boarderRight)
+    boarderRightImg:moveTo(340,10)
+    boarderRightImg:add()
     --printHi()
     --ModuleTest:printHi()
     createScoreDisplay()
