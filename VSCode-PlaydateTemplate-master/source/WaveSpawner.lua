@@ -23,7 +23,7 @@ local PEN_Y_POS = 220
 local PEN_X_POS = 55
 local PEN_BORDER_Y_MIN = 230
 local PEN_BORDER_Y_MAX = 200
-
+local turnOnWave = true
 local yInterval = 8
 y1 = 0
 y2 = 0
@@ -52,15 +52,24 @@ end
 
 function WaveSpawner:update()
     WaveSpawner.super.update(self)
-    self:moveBy(-self.speed, 0)
-    if self.x < -400 then
-        self.x = 400
-        self:moveTo(400, self.startingY)
-    end
+    -- if self.x < -25 and turnOnWave then
+    --     self.x = 500
+    --     self:moveTo(500, self.startingY)
+    -- end
     i += 1
 
-    self:DrawWaves(self.x, self.y, self.period)
-    self:isBetweenRange(self.penObject)
+    if turnOnWave then
+        if self.x > 410 then
+            self.x = 350
+            self:moveTo(350, self.startingY)
+        end
+        self:moveBy(-self.speed, 0)
+        self:DrawWaves(self.x, self.y, self.period)
+        self:isBetweenRange(self.penObject)
+    else
+        self.x = 700
+        self:moveTo(700, self.startingY)
+    end
 end
 
 --#region == Mutators ==
@@ -134,3 +143,15 @@ function WaveSpawner:isBetweenRange(penObject)
     return inRange
 end
 --#endregion
+
+function TurnOffWave()
+    turnOnWave = false
+    --self.x = 400
+    --Bself:moveTo(400, self.startingY)
+end
+
+function TurnOnWave()
+    --self.x = 400
+    --Bself:moveTo(400, self.startingY)
+    turnOnWave = true
+end

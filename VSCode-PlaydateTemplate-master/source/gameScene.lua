@@ -33,6 +33,7 @@ local WAVE_SPEED = 1
 local switchTrans = false
 local startTime = false
 local pauseTime = 15
+local wavePauseTime = 17
 local health = 4
 
 function GameScene:init()
@@ -61,6 +62,7 @@ function GameScene:init()
     ABPlayer(51, 189, gfx.image.new("Sprites/Button"))
 
     -- Spawn the waves from the right of the screen
+    WAVE_PERIOD = math.random(60,140)
     WaveSpawner (SCREEN_X, WAVE_START_Y, WAVE_LENGTH, WAVE_AMP, WAVE_PERIOD, WAVE_SPEED)
 
     startSpawner()
@@ -82,6 +84,7 @@ function GameScene.update()
         if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
             switchTrans = true
             TurnOffSpawner()
+            TurnOffWave()
             -- heres an example of how we can turn off the spawner
                 -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
                 -- refer to line 28 for how I got access to the object like this
@@ -91,6 +94,11 @@ function GameScene.update()
             pauseTime += 20
             TurnOffSpawner()
             print("timer stopped")
+        end
+        if(math.floor(pd.getElapsedTime()) % wavePauseTime == 0 and switchTrans == false) then
+            wavePauseTime += 20
+            TurnOffWave()
+            print("wave timer stopped")
         end
     end
     
@@ -132,10 +140,13 @@ function playdate.gameWillResume()
 		gfx.clear()
         switchTrans = false
         TurnOnSpawner()
+        TurnOnWave()
+        WAVE_PERIOD = math.random(80,120)
         print("timer started")
 		
 		-- restore the "real" playdate.update
 		playdate.update = saveOffUpdate
+        
 
 	end
 		

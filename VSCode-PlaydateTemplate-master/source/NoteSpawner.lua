@@ -11,7 +11,7 @@ class('NoteSpawner').extends()
 local spawnTimer
 local seqCounter = 0
 local whichNoteSeq = math.random(1,4)
-local canSpawn = true
+canSpawn = true
 
 function startSpawner()
     --hi
