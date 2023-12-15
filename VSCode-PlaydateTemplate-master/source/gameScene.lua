@@ -64,6 +64,7 @@ function GameScene:init()
     -- Spawn the waves from the right of the screen
     WAVE_PERIOD = math.random(60,140)
     WaveSpawner (SCREEN_X, WAVE_START_Y, WAVE_LENGTH, WAVE_AMP, WAVE_PERIOD, WAVE_SPEED)
+    TurnSoundOn()
 
     startSpawner()
 
@@ -84,6 +85,7 @@ function GameScene.update()
         if(math.floor(pd.getElapsedTime()) % 20 == 0 and switchTrans == false) then
             switchTrans = true
             TurnOffSpawner()
+            TurnSoundOff()
             TurnOffWave()
             -- heres an example of how we can turn off the spawner
                 -- I also made a TurnOnSpawner() that can be called in the same way anywhere in this script
@@ -93,11 +95,13 @@ function GameScene.update()
         if(math.floor(pd.getElapsedTime()) % pauseTime == 0 and switchTrans == false) then
             pauseTime += 20
             TurnOffSpawner()
+            TurnSoundOff()
             print("timer stopped")
         end
         if(math.floor(pd.getElapsedTime()) % wavePauseTime == 0 and switchTrans == false) then
             wavePauseTime += 20
             TurnOffWave()
+            TurnSoundOff()
             print("wave timer stopped")
         end
     end
@@ -147,7 +151,8 @@ function playdate.gameWillResume()
 		-- restore the "real" playdate.update
 		playdate.update = saveOffUpdate
         
-
+        -- resume sound
+        TurnSoundOn()
 	end
 		
 end
