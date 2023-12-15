@@ -24,7 +24,7 @@ local PEN_X_POS = 55
 local PEN_BORDER_Y_MIN = 230
 local PEN_BORDER_Y_MAX = 200
 
-local yInterval = 20
+local yInterval = 8
 y1 = 0
 y2 = 0
 i = 0
@@ -87,23 +87,23 @@ function WaveSpawner:calculateSinY(x, b, a)
 end
 
 function WaveSpawner:DrawWaves(x, y, period)
-    local testSprite = gfx.image.new(400, 240)
+    --TOP LEFT: 43, 199
+    --BOTTOM RIGHT: 357, 231
+    -- W: 314, H: 32
+    local testSprite = gfx.image.new(314, 64)
 
     --calculate with respect to the penObject x-position and the wave length
-    y1 = WaveSpawner:calculateSinY(x, period, self.amp) + PEN_BORDER_Y_MAX
-    y2 = y1 + yInterval
+    y1 = WaveSpawner:calculateSinY(x, period, self.amp) + 215 - yInterval
+    y2 = y1 + 2 * yInterval
 
     gfx.pushContext(testSprite)
-        -- draw debug line
-        --gfx.drawRect(self.penObject.x, y1, 800, 1)
-        --gfx.drawRect(self.penObject.x, y2, 800, 1)
         -- draw sine waves
-        --gfx.drawSineWave(x, y, x+400, y, self.amp, 1, period, i)
-        --gfx.drawSineWave(x, y + yInterval, x+400, y + yInterval, self.amp, 0, period, i)
-        gfx.drawSineWave(x, y, x + self.length, y, self.amp, self.amp, period, 0)
-        gfx.drawSineWave(x, y + yInterval, x + self.length, y + yInterval, self.amp, self.amp, period, 0)
+        gfx.drawSineWave(x, 32 - yInterval, x + self.length, 32 - yInterval, self.amp, self.amp, period, 0)
+        gfx.drawSineWave(x, 32 + yInterval, x + self.length, 32 + yInterval, self.amp, self.amp, period, 0)
+
+        --gfx.drawSineWave(x, y, x + self.length, y, self.amp, self.amp, period, 0)
+        --gfx.drawSineWave(x, y + yInterval, x + self.length, y + yInterval, self.amp, self.amp, period, 0)
     gfx.popContext()
-    --sprint(y1 .. ", " .. y2)
 
     self:setImage(testSprite)
 end
@@ -115,7 +115,7 @@ end
 function WaveSpawner:isBetweenRange(penObject)
     local inRange = false
     local penMiddle = self.penObject.y
-    if self.penObject.x >= self.x - self.length/2 then
+    if self.penObject.x >= self.x - self.length/3 then
         if penMiddle > y1 and penMiddle < y2 then
             print("in range " .. y2 .. " > " .. penMiddle .. " > " .. y1)
             --self.waveSynth:playNote(penObject.y)
