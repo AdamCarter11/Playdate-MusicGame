@@ -28,6 +28,7 @@ local yInterval = 8
 y1 = 0
 y2 = 0
 i = 0
+local isSoundOn = false
 
 function WaveSpawner:init(x, y, length, amp, period, speed)
     WaveSpawner.super.init(self)
@@ -35,7 +36,13 @@ function WaveSpawner:init(x, y, length, amp, period, speed)
     -- Spawn pen (crank controlled character)
     self.penObject = Pen (PEN_X_POS, PEN_Y_POS, 1, PEN_BORDER_Y_MAX, PEN_BORDER_Y_MIN)
 
+    -- Set new wave synth
     self.waveSynth = snd.synth.new(snd.kWaveSawtooth)
+    self.waveSynth:setVolume(0.2)
+    self.waveSynth:setAttack(0.15)
+    self.waveSynth:setDecay(0.15)
+    self.waveSynth:setSustain(0.2)
+    self.waveSynth:setRelease(0)
 
     self.startingX = x
     self.startingY = y
@@ -57,6 +64,10 @@ function WaveSpawner:update()
     --     self:moveTo(500, self.startingY)
     -- end
     i += 1
+
+    if not isSoundOn then
+        self.waveSynth:stop()
+    end
 
     if turnOnWave then
         if self.x > 410 then
@@ -126,19 +137,38 @@ function WaveSpawner:isBetweenRange(penObject)
     local penMiddle = self.penObject.y
     if self.penObject.x >= self.x - self.length/3 then
         if penMiddle > y1 and penMiddle < y2 then
-            print("in range " .. y2 .. " > " .. penMiddle .. " > " .. y1)
-            --self.waveSynth:playNote(penObject.y)
+            print("in range " .. y2 .. " > " .. penMiddle .. " > " .. y1)                
+            -- play vibrato sound
+            if isSoundOn then
+                if pd.getCurrentTimeMilliseconds() % 40 == 0 then
+                    self.waveSynth:playNote('C4')
+                elseif pd.getCurrentTimeMilliseconds() % 40 == 10 then
+                    self.waveSynth:playNote('F4')
+                elseif pd.getCurrentTimeMilliseconds() % 40 == 20 then
+                    self.waveSynth:playNote('G4')
+                elseif pd.getCurrentTimeMilliseconds() % 40 == 30 then
+                    self.waveSynth:playNote('B3')       
+                end
+            else 
+                self.waveSynth:noteOff()
+            end
             addWaveScore()
             return true
         elseif penMiddle <= y1 then
-            --self.waveSynth:playNote(penObject.y + self.y)
+            if isSoundOn then
+                self.waveSynth:playNote(penObject.y + self.y/2)
+            end
             print("NOT in range " .. y2 .. " > " .. penMiddle .. " > " .. y1)
         elseif penMiddle >= y2 then
-            --self.waveSynth:playNote(penObject.y - self.y)
+            if isSoundOn then
+                self.waveSynth:playNote(penObject.y - self.y/2)
+            end
             print("NOT in range " .. y2 .. " > " .. penMiddle .. " > " .. y1)
         else
-            --self.waveSynth:noteOff()
+            self.waveSynth:noteOff()
         end
+    else 
+        self.waveSynth:noteOff()
     end
     return inRange
 end
@@ -154,4 +184,12 @@ function TurnOnWave()
     --self.x = 400
     --Bself:moveTo(400, self.startingY)
     turnOnWave = true
+end
+
+function TurnSoundOn()
+    isSoundOn = true
+ end
+
+function TurnSoundOff()
+   isSoundOn = false
 end
